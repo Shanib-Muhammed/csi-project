@@ -40,9 +40,9 @@ The receiver uses ESP-IDF Wi-Fi CSI APIs exposed by Arduino-ESP32: esp_wifi_set_
 3. In Boards Manager, install esp32 by Espressif Systems (3.x).
 4. Connect board #1, select ESP32 Dev Module and its COM port, open firmware/transmitter/transmitter.ino, compile and upload.
 5. Connect board #2, select its COM port, open firmware/receiver/receiver.ino, compile and upload.
-6. Close Arduino Serial Monitor before starting Python; only one program can own the COM port at a time.
+6. Close Arduino Serial Monitor before starting Python; only one program can own the COM port at a time.\n7. To verify board #1, open its Serial Monitor at 115200 baud. After TX_READY, expect TX_STATS every 2 seconds; packets_sent should increase. Once board #2 joins, stations should be 1.\n8. To verify board #2, open its Serial Monitor at 921600 baud. Expect JSON status lines including connected and csi_enabled, followed by repeated {\"type\":\"csi\",...} records. Close the monitor before starting the Python backend.
 
-Default settings (must match in both sketches): SSID CSI-RADAR-LINK; password radar-demo-32; channel 6; UDP port 3333; serial baud 921600. The transmitter creates a local Wi-Fi network with no internet access.
+Default radio settings (must match in both sketches): SSID CSI-RADAR-LINK; password radar-demo-32; channel 6; UDP port 3333. Serial speeds are different by design: transmitter diagnostics use 115200 baud; receiver CSI JSON uses 921600 baud. The transmitter creates a local Wi-Fi network with no internet access. The laptop does not need to join that Wi-Fi network.
 
 ## 2. Install Python application (Windows PowerShell)
 From the repository root, run:
