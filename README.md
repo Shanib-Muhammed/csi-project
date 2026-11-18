@@ -104,3 +104,29 @@ This is an initial implementation for hardware bring-up. It must be compiled wit
 
 ## License
 MIT. See LICENSE.
+
+## Quick Windows launcher
+
+After flashing both ESP32 boards, open PowerShell in the repository folder and run:
+
+    .\start.ps1 -Port COM6
+
+Replace COM6 with the receiver board's actual port. The first run creates a virtual environment and installs Python dependencies. Later runs can use:
+
+    .\start.ps1 -Port COM6 -SkipInstall
+
+To open the dashboard without a connected receiver (hardware will remain marked disconnected):
+
+    .\start.ps1 -Port NONE
+
+The launcher saves the selected port in config.json. You can also edit that file manually.
+
+## Run the automated Python checks
+
+    .\.venv\Scripts\python.exe -m unittest discover -s tests -v
+
+These tests cover the software detection state machine only. They do not replace a live ESP32 CSI test.
+
+## GitHub versus local runtime
+
+GitHub hosts the source code and documentation. The live sensing backend must run on the laptop physically connected by USB to the receiver ESP32. GitHub Pages cannot access a local COM port or run this Python serial backend, so the supported deployment for the complete system is the laptop's local address: http://127.0.0.1:8000. Do not deploy the serial-connected backend as a static GitHub Pages site.
