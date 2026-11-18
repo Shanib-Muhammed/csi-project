@@ -25,7 +25,7 @@ detector = PresenceDetector(int(CONFIG.get("calibration_samples", 120)), int(CON
 store = EventStore(str(ROOT / CONFIG.get("database_path", "data/radar.db")))
 lock = threading.Lock()
 latest: dict[str, Any] = {
-    "connected": False, "source": "real-csi", "status": "WAITING",
+    "connected": False, "source": "none", "status": "WAITING",
     "presence": False, "calibrated": False, "packet_count": 0,
     "rssi": 0, "channel": 0, "signal_score": 0, "motion_score": 0,
     "amplitude_mean": 0, "amplitude_std": 0, "subcarriers": 0, "heat": 0,
