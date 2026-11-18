@@ -130,3 +130,9 @@ These tests cover the software detection state machine only. They do not replace
 ## GitHub versus local runtime
 
 GitHub hosts the source code and documentation. The live sensing backend must run on the laptop physically connected by USB to the receiver ESP32. GitHub Pages cannot access a local COM port or run this Python serial backend, so the supported deployment for the complete system is the laptop's local address: http://127.0.0.1:8000. Do not deploy the serial-connected backend as a static GitHub Pages site.
+
+
+## Detailed project guides
+
+- [Hardware setup and board placement](docs/HARDWARE_SETUP.md)
+- [Working principle and signal-processing flow](docs/WORKING_PRINCIPLE.md)
