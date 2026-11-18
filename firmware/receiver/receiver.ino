@@ -26,7 +26,7 @@ volatile uint32_t droppedRecords = 0;
 void csiReceiveCallback(void *ctx, wifi_csi_info_t *info) {
   if (info == nullptr || info->buf == nullptr || csiQueue == nullptr) return;
   CsiRecord record{};
-  record.timestamp = info->rx_ctrl.timestamp;
+  record.timestamp = micros();
   record.rssi = info->rx_ctrl.rssi;
   record.channel = info->rx_ctrl.channel;
   record.firstWordInvalid = info->first_word_invalid ? 1 : 0;
