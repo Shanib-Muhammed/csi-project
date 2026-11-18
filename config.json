@@ -1,0 +1,8 @@
+{
+  "serial_port": null,
+  "serial_baud": 921600,
+  "web_port": 8000,
+  "calibration_samples": 120,
+  "motion_window": 15,
+  "database_path": "data/radar.db"
+}
