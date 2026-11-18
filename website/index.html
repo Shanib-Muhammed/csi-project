@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Wi-Fi Sense Radar</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div><div class="eyebrow">OFFLINE RF SENSING PLATFORM</div><h1>WI-FI SENSE <span>RADAR</span></h1></div>
+      <div class="connection"><i id="connectionDot"></i><span id="connectionText">CONNECTING</span></div>
+    </header>
+    <section class="metrics">
+      <article class="metric"><label>ROOM PRESENCE</label><strong id="presence">WAITING</strong><small id="presenceHint">Waiting for CSI receiver</small></article>
+      <article class="metric"><label>MOVEMENT SCORE</label><strong id="motion">0.0</strong><small>Recent signal variation</small></article>
+      <article class="metric"><label>SIGNAL CHANGE</label><strong id="signal">0.0</strong><small>Baseline deviation score</small></article>
+      <article class="metric"><label>CSI PACKETS</label><strong id="packets">0</strong><small id="source">No data source</small></article>
+    </section>
+    <main class="grid">
+      <section class="panel heat-panel">
+        <div class="panel-head"><div><label>LIVE 2D SIGNAL ACTIVITY</label><h2>Detection field</h2></div><span class="pill" id="fieldState">NOT CALIBRATED</span></div>
+        <div class="heatmap-wrap">
+          <canvas id="heatmap" aria-label="2D signal activity visualization"></canvas>
+          <div class="map-legend"><span><i class="blue"></i>Baseline</span><span><i class="yellow"></i>Signal change</span><span><i class="red"></i>High deviation</span></div>
+          <div class="map-note">Qualitative signal-change visualization — not a camera image or measured object coordinates.</div>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><div><label>LIVE CSI TELEMETRY</label><h2>Radio measurements</h2></div><span class="pill">2.4 GHz Wi-Fi</span></div>
+        <div class="telemetry">
+          <div><label>RSSI</label><strong id="rssi">— dBm</strong></div>
+          <div><label>CHANNEL</label><strong id="channel">—</strong></div>
+          <div><label>SUBCARRIERS</label><strong id="subcarriers">—</strong></div>
+          <div><label>CSI AMPLITUDE</label><strong id="amplitude">—</strong></div>
+        </div>
+        <canvas id="signalChart" class="chart" aria-label="CSI signal history"></canvas>
+      </section>
+      <section class="panel calibration">
+        <div class="panel-head"><div><label>SETUP & CALIBRATION</label><h2>Empty-area baseline</h2></div></div>
+        <p>Place both ESP32 boards, clear the monitored area, then calibrate without moving anything.</p>
+        <button id="calibrate">CALIBRATE EMPTY AREA</button>
+        <p class="hint" id="calibrationHint">Calibration needs 120 valid CSI samples. Keep the area still.</p>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><div><label>DETECTION HISTORY</label><h2>Recent events</h2></div><button class="secondary" id="refreshEvents">REFRESH</button></div>
+        <div id="events" class="events"><p class="muted">No events recorded yet.</p></div>
+      </section>
+    </main>
+    <footer>LOCAL ONLY · ESP32 CSI · PYTHON PROCESSING · NO INTERNET REQUIRED</footer>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
