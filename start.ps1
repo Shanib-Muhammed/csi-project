@@ -32,7 +32,8 @@ if ($Port -eq "NONE") {
     $config.serial_port = $Port
     Write-Host "Using receiver serial port: $Port"
 }
-$config | ConvertTo-Json -Depth 5 | Set-Content $configPath -Encoding UTF8
+$json = $config | ConvertTo-Json -Depth 5
+[System.IO.File]::WriteAllText($configPath, $json, [System.Text.UTF8Encoding]::new($false))
 
 Write-Host "Starting Wi-Fi Sense Radar at http://127.0.0.1:8000"
 & $python -m backend.main
